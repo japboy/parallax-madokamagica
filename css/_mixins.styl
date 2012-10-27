@@ -1,0 +1,277 @@
+//
+// Common mixins
+
+// My custom properties
+
+text-stroke(number color)
+  text-shadow: (number * -1) (number * -1) 0 color, number (number * -1) 0 color, (number * -1) number 0 color, number number 0 color
+
+
+// Filter Effects 1.0 (Editor's Draft)
+// http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html
+
+filter()
+  -webkit-filter: arguments
+  filter: arguments
+
+filter-margin()
+  -webkit-filter-margin: arguments
+  filter-margin: arguments
+
+filter-margin-top()
+  -webkit-filter-margin-top: arguments
+  filter-margin-top: arguments
+
+filter-margin-right()
+  -webkit-filter-margin-right: arguments
+  filter-margin-right: arguments
+
+filter-margin-bottom()
+  -webkit-filter-margin-bottom: arguments
+  filter-margin-bottom: arguments
+
+filter-margin-left()
+  -webkit-filter-margin-left: arguments
+  filter-margin-left: arguments
+
+color-interpolation-filters()
+  -webkit-color-interpolation-filters: arguments
+  color-interpolation-filters: arguments
+
+
+// CSS 3 Flexbox
+// http://www.w3.org/TR/css3-flexbox/
+
+flex()
+  -webkit-flex: arguments
+  -moz-flex: arguments
+  -ms-flex: arguments
+  -o-flex: arguments
+  flex: arguments
+
+flex-grow()
+  -webkit-flex-grow: arguments
+  -moz-flex-grow: arguments
+  -ms-flex-grow: arguments
+  -o-flex-grow: arguments
+  flex-grow: arguments
+
+flex-shrink()
+  -webkit-flex-shrink: arguments
+  -moz-flex-shrink: arguments
+  -ms-flex-shrink: arguments
+  -o-flex-shrink: arguments
+  flex-shrink: arguments
+
+flex-basis()
+  -webkit-flex-basis: arguments
+  -moz-flex-basis: arguments
+  -ms-flex-basis: arguments
+  -o-flex-basis: arguments
+  flex-basis: arguments
+
+justify-content()
+  -webkit-justify-content: arguments
+  -moz-justify-content: arguments
+  -ms-justify-content: arguments
+  -o-justify-content: arguments
+  justify-content: arguments
+
+align-items()
+  -webkit-align-items: arguments
+  -moz-align-items: arguments
+  -ms-align-items: arguments
+  -o-align-items: arguments
+  align-items: arguments
+
+align-self()
+  -webkit-align-self: arguments
+  -moz-align-self: arguments
+  -ms-align-self: arguments
+  -o-align-self: arguments
+  align-self: arguments
+
+align-content()
+  -webkit-align-content: arguments
+  -moz-align-content: arguments
+  -ms-align-content: arguments
+  -o-align-content: arguments
+  align-content: arguments
+
+
+// CSS 3 properties using vendor prefixes
+
+animation()
+  -webkit-animation: arguments
+  -moz-animation: arguments
+  -ms-animation: arguments
+  -o-animation: arguments
+  animation: arguments
+
+animation-delay()
+  -webkit-animation-delay: arguments
+  -moz-animation-delay: arguments
+  -ms-animation-delay: arguments
+  -o-animation-delay: arguments
+  animation-delay: arguments
+
+animation-direction()
+  -webkit-animation-direction: arguments
+  -moz-animation-direction: arguments
+  -ms-animation-direction: arguments
+  -o-animation-direction: arguments
+  animation-direction: arguments
+
+animation-duration()
+  -webkit-animation-duration: arguments
+  -moz-animation-duration: arguments
+  -ms-animation-duration: arguments
+  -o-animation-duration: arguments
+  animation-duration: arguments
+
+animation-fill-mode()
+  -webkit-animation-fill-mode: arguments
+  -moz-animation-fill-mode: arguments
+  -ms-animation-fill-mode: arguments
+  -o-animation-fill-mode: arguments
+  animation-fill-mode: arguments
+
+animation-iteration-count()
+  -webkit-animation-iteration-count: arguments
+  -moz-animation-iteration-count: arguments
+  -ms-animation-iteration-count: arguments
+  -o-animation-iteration-count: arguments
+  animation-iteration-count: arguments
+
+animation-name()
+  -webkit-animation-name: arguments
+  -moz-animation-name: arguments
+  -ms-animation-name: arguments
+  -o-animation-name: arguments
+  animation-name: arguments
+
+animation-play-state()
+  -webkit-animation-play-state: arguments
+  -moz-animation-play-state: arguments
+  -ms-animation-play-state: arguments
+  -o-animation-play-state: arguments
+  animation-play-state: arguments
+
+animation-timing-function()
+  -webkit-animation-timing-function: arguments
+  -moz-animation-timing-function: arguments
+  -ms-animation-timing-function: arguments
+  -o-animation-timing-function: arguments
+  animation-timing-function: arguments
+
+border-radius()
+  -webkit-border-radius: arguments
+  -moz-border-radius: arguments
+  -ms-border-radius: arguments
+  -o-border-radius: arguments
+  border-radius: arguments
+
+border-top-left-radius()
+  -webkit-top-left-border-radius: arguments
+  -moz-border-top-left-radius: arguments
+  -ms-border-top-left-radius: arguments
+  -o-border-top-left-radius: arguments
+  border-top-left-radius: arguments
+
+border-top-right-radius()
+  -webkit-border-top-right-radius: arguments
+  -moz-border-top-right-radius: arguments
+  -ms-border-top-right-radius: arguments
+  -o-border-top-right-radius: arguments
+  border-top-right-radius: arguments
+
+border-bottom-right-radius()
+  -webkit-border-bottom-right-radius: arguments
+  -moz-border-bottom-right-radius: arguments
+  -ms-border-bottom-right-radius: arguments
+  -o-border-bottom-right-radius: arguments
+  border-bottom-right-radius: arguments
+
+border-bottom-left-radius()
+  -webkit-border-bottom-left-radius: arguments
+  -moz-border-bottom-left-radius: arguments
+  -ms-border-bottom-left-radius: arguments
+  -o-border-bottom-left-radius: arguments
+  border-bottom-left-radius: arguments
+
+box-shadow()
+  -webkit-box-shadow: arguments
+  -moz-box-shadow: arguments
+  -ms-box-shadow: arguments
+  -o-box-shadow: arguments
+  box-shadow: arguments
+
+perspective()
+  -webkit-perspective: arguments
+  -moz-perspective: arguments
+  -ms-perspective: arguments
+  -o-perspective: arguments
+  perspective: arguments
+
+perspective-origin()
+  -webkit-perspective-origin: arguments
+  -moz-perspective-origin: arguments
+  -ms-perspective-origin: arguments
+  -o-perspective-origin: arguments
+  perspective-origin: arguments
+
+transform()
+  -webkit-transform: arguments
+  -moz-transform: arguments
+  -ms-transform: arguments
+  -o-transform: arguments
+  transform: arguments
+
+transform-origin()
+  -webkit-transform-origin: arguments
+  -moz-transform-origin: arguments
+  -ms-transform-origin: arguments
+  -o-transform-origin: arguments
+  transform-origin: arguments
+
+transform-style()
+  -webkit-transform-style: arguments
+  -moz-transform-style: arguments
+  -ms-transform-style: arguments
+  -o-transform-style: arguments
+  transform-style: arguments
+
+transition()
+  -webkit-transition: arguments
+  -moz-transition: arguments
+  -ms-transition: arguments
+  -o-transition: arguments
+  transition: arguments
+
+transition-delay()
+  -webkit-transition-delay: arguments
+  -moz-transition-delay: arguments
+  -ms-transition-delay: arguments
+  -o-transition-delay: arguments
+  transition-delay: arguments
+
+transition-duration()
+  -webkit-transition-duration: arguments
+  -moz-transition-duration: arguments
+  -ms-transition-duration: arguments
+  -o-transition-duration: arguments
+  transition-duration: arguments
+
+transition-property()
+  -webkit-transition-property: arguments
+  -moz-transition-property: arguments
+  -ms-transition-property: arguments
+  -o-transition-property: arguments
+  transition-property: arguments
+
+transition-timing-function()
+  -webkit-transition-timing-function: arguments
+  -moz-transition-timing-function: arguments
+  -ms-transition-timing-function: arguments
+  -o-transition-timing-function: arguments
+  transition-timing-function: arguments

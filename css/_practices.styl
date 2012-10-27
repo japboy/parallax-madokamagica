@@ -1,0 +1,13 @@
+//
+// Common practices
+
+// Clearfix
+// Add `clearfix` class to the parent element of the `float`-ed elements
+
+.clearfix:before,
+.clearfix:after
+  content: " "
+  display: table
+
+.clearfix:after
+  clear: both
