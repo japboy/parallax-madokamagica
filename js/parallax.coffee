@@ -36,12 +36,13 @@ $.extend
 
 
 $ ->
+  $window = $(window)
   $main = $('#main')
 
-  handleLoadProgress = ->
-    threshold = 100 / arguments.length
+  handleLoadProgress = (items...) ->
+    threshold = 100 / items.length
     percentage = 0
-    percentage += threshold for item in arguments when undefined != item
+    percentage += threshold for item in items when undefined != item
 
     $('#loader').text("#{Math.round percentage} %")
 
@@ -50,9 +51,7 @@ $ ->
     console.log textStatus
 
 
-  handleLoadComplete = ->
-    items = arguments
-
+  handleLoadComplete = (items...) ->
     $main.empty()
 
     for item, i in items
@@ -64,54 +63,23 @@ $ ->
         id: i
       .css
         backgroundImage: "url(#{item})"
-        backgroundAttachment: 'fixed'
 
       $main.append $div
 
-    $window = $(window)
-
     $('.image').each (index) ->
       $self = $(@)
-      offsetCoords = $self.offset()
 
       $(window).on 'scroll', (ev) ->
-        a = $window.scrollTop() + $window.height()
-        b = offsetCoords.top + $self.height()
+        windowBottomPosY = $window.scrollTop() + $window.height()
+        selfBottomPosY = $self.offset().top + $self.height()
 
-        if a > offsetCoords.top and b > $window.scrollTop()
-          id = $self.attr 'id'
-          yPos = $window.scrollTop() / -8
-
-          switch id
-            when '0'
-              yPos = yPos
-            when '1'
-              yPos += 10
-            when '2'
-              yPos += 100
-            when '3'
-              yPos += 100
-            when '4'
-              yPos += 100
-            when '5'
-              yPos += 100
-            when '6'
-              yPos += 150
-            when '7'
-              yPos += 200
-            when '8'
-              yPos += 300
-            when '9'
-              yPos += 350
-            when '10'
-              yPos += 450
-            when '11'
-              yPos += 500
-            else
-              yPos += 500
+        if windowBottomPosY > $self.offset().top and selfBottomPosY > $window.scrollTop()
+          middlePosY = (($self.height() * 1.5) - $self.height()) / 2 * (-1)
+          adjustment = $window.scrollTop() - $self.offset().top
+          yPos = adjustment / 8 * (-1)
 
           $self.css
-            backgroundPositionY: "#{yPos}px"
+            backgroundPosition: "50% #{middlePosY + yPos}px"
 
 
   promises = $.preloadByDOM(items)

@@ -1,8 +1,9 @@
 /**
- * File built with Cakefile at 2012-10-28T03:14:04+09:00
+ * File built with Cakefile at 2012-10-28T09:34:50+09:00
  */
 (function() {
-  var $, items;
+  var $, items,
+    __slice = [].slice;
 
   items = ['http://www.madoka-magica.com/tv/special/yokokugallery/img/01.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/02.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/03.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/04.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/05.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/06.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/07.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/08.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/09.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/10.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/11.jpg', 'http://www.madoka-magica.com/tv/special/yokokugallery/img/12.jpg'];
 
@@ -33,14 +34,16 @@
   });
 
   $(function() {
-    var $main, handleLoadComplete, handleLoadError, handleLoadProgress, promises;
+    var $main, $window, handleLoadComplete, handleLoadError, handleLoadProgress, promises;
+    $window = $(window);
     $main = $('#main');
     handleLoadProgress = function() {
-      var item, percentage, threshold, _i, _len;
-      threshold = 100 / arguments.length;
+      var item, items, percentage, threshold, _i, _len;
+      items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      threshold = 100 / items.length;
       percentage = 0;
-      for (_i = 0, _len = arguments.length; _i < _len; _i++) {
-        item = arguments[_i];
+      for (_i = 0, _len = items.length; _i < _len; _i++) {
+        item = items[_i];
         if (void 0 !== item) {
           percentage += threshold;
         }
@@ -51,8 +54,8 @@
       return console.log(textStatus);
     };
     handleLoadComplete = function() {
-      var $div, $window, i, item, _i, _len;
-      items = arguments;
+      var $div, i, item, items, _i, _len;
+      items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       $main.empty();
       for (i = _i = 0, _len = items.length; _i < _len; i = ++_i) {
         item = items[i];
@@ -60,65 +63,23 @@
         $div.addClass('image').attr({
           id: i
         }).css({
-          backgroundImage: "url(" + item + ")",
-          backgroundAttachment: 'fixed'
+          backgroundImage: "url(" + item + ")"
         });
         $main.append($div);
       }
-      $window = $(window);
       return $('.image').each(function(index) {
-        var $self, offsetCoords;
+        var $self;
         $self = $(this);
-        offsetCoords = $self.offset();
         return $(window).on('scroll', function(ev) {
-          var a, b, id, yPos;
-          a = $window.scrollTop() + $window.height();
-          b = offsetCoords.top + $self.height();
-          if (a > offsetCoords.top && b > $window.scrollTop()) {
-            id = $self.attr('id');
-            yPos = $window.scrollTop() / -8;
-            switch (id) {
-              case '0':
-                yPos = yPos;
-                break;
-              case '1':
-                yPos += 10;
-                break;
-              case '2':
-                yPos += 100;
-                break;
-              case '3':
-                yPos += 100;
-                break;
-              case '4':
-                yPos += 100;
-                break;
-              case '5':
-                yPos += 100;
-                break;
-              case '6':
-                yPos += 150;
-                break;
-              case '7':
-                yPos += 200;
-                break;
-              case '8':
-                yPos += 300;
-                break;
-              case '9':
-                yPos += 350;
-                break;
-              case '10':
-                yPos += 450;
-                break;
-              case '11':
-                yPos += 500;
-                break;
-              default:
-                yPos += 500;
-            }
+          var adjustment, middlePosY, selfBottomPosY, windowBottomPosY, yPos;
+          windowBottomPosY = $window.scrollTop() + $window.height();
+          selfBottomPosY = $self.offset().top + $self.height();
+          if (windowBottomPosY > $self.offset().top && selfBottomPosY > $window.scrollTop()) {
+            middlePosY = (($self.height() * 1.5) - $self.height()) / 2 * (-1);
+            adjustment = $window.scrollTop() - $self.offset().top;
+            yPos = adjustment / 8 * (-1);
             return $self.css({
-              backgroundPositionY: "" + yPos + "px"
+              backgroundPosition: "50% " + (middlePosY + yPos) + "px"
             });
           }
         });
