@@ -4,15 +4,10 @@ block head-title
   title 魔法少女まどか☆マギカ
 
 block head-meta
-  meta(name='keywords', content='key1,key2,key3')
-  meta(name='description', content='Description of this page')
+  meta(name='robots', content='noindex,nofollow')
 
 block head-style
   link(rel='stylesheet', href='./css/parallax.min.css')
-  //
-    [if IE]>
-    link(rel='stylesheet', href='./css/iefix.min.css')
-    <![endif]
 
 block body-content
   header

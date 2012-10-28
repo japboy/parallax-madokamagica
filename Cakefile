@@ -26,6 +26,7 @@ targets = [
   './'
   './css'
   './js'
+  './lib'
 ]
 
 # Specify header for converted JavaScript/CSS files
