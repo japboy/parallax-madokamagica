@@ -1,5 +1,5 @@
 /**
- * File built with Cakefile at 2012-10-28T09:36:30+09:00
+ * File built with Cakefile at 2012-10-28T10:19:49+09:00
  */
 body {
   margin: 0;
@@ -24,21 +24,19 @@ body header h1 {
 }
 body #main {
   position: absolute;
-  height: 1200%;
   width: 100%;
 }
 body #main #loader {
   color: #c8c8c8;
-  position: absolute;
+  position: fixed;
   text-align: center;
-  top: 4.166666666666667%;
+  top: 45%;
   width: 100%;
 }
 body #main .image {
   background-attachment: fixed;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: 150%;
   box-shadow: 0 0 50px #000;
   height: 8.333333333333334%;
   position: relative;

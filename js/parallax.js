@@ -1,5 +1,5 @@
 /**
- * File built with Cakefile at 2012-10-28T09:34:50+09:00
+ * File built with Cakefile at 2012-10-28T10:18:56+09:00
  */
 (function() {
   var $, items,
@@ -56,27 +56,34 @@
     handleLoadComplete = function() {
       var $div, i, item, items, _i, _len;
       items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      $main.empty();
+      $main.css({
+        height: "" + (items.length * 100) + "%"
+      }).empty();
       for (i = _i = 0, _len = items.length; _i < _len; i = ++_i) {
         item = items[i];
         $div = $('<div/>');
         $div.addClass('image').attr({
-          id: i
+          id: i,
+          'data-scale': 1.1
         }).css({
-          backgroundImage: "url(" + item + ")"
+          backgroundImage: "url(" + item + ")",
+          backgroundSize: "" + ($div.data('scale') * 100) + "%"
         });
         $main.append($div);
       }
       return $('.image').each(function(index) {
-        var $self;
+        var $self, selfHeight, selfOffsetTop, selfScale;
         $self = $(this);
+        selfOffsetTop = $self.offset().top;
+        selfHeight = $self.height();
+        selfScale = $self.data('scale');
         return $(window).on('scroll', function(ev) {
           var adjustment, middlePosY, selfBottomPosY, windowBottomPosY, yPos;
           windowBottomPosY = $window.scrollTop() + $window.height();
           selfBottomPosY = $self.offset().top + $self.height();
-          if (windowBottomPosY > $self.offset().top && selfBottomPosY > $window.scrollTop()) {
-            middlePosY = (($self.height() * 1.5) - $self.height()) / 2 * (-1);
-            adjustment = $window.scrollTop() - $self.offset().top;
+          if (windowBottomPosY > selfOffsetTop && selfBottomPosY > $window.scrollTop()) {
+            middlePosY = ((selfHeight * selfScale) - selfHeight) / 2 * (-1);
+            adjustment = $window.scrollTop() - selfOffsetTop;
             yPos = adjustment / 8 * (-1);
             return $self.css({
               backgroundPosition: "50% " + (middlePosY + yPos) + "px"

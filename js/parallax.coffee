@@ -52,7 +52,10 @@ $ ->
 
 
   handleLoadComplete = (items...) ->
-    $main.empty()
+    $main
+    .css
+      height: "#{items.length * 100}%"
+    .empty()
 
     for item, i in items
       $div = $('<div/>')
@@ -61,21 +64,26 @@ $ ->
       .addClass('image')
       .attr
         id: i
+        'data-scale': 1.1
       .css
         backgroundImage: "url(#{item})"
+        backgroundSize: "#{$div.data('scale') * 100}%"
 
       $main.append $div
 
     $('.image').each (index) ->
       $self = $(@)
+      selfOffsetTop = $self.offset().top
+      selfHeight = $self.height()
+      selfScale = $self.data 'scale'
 
       $(window).on 'scroll', (ev) ->
         windowBottomPosY = $window.scrollTop() + $window.height()
         selfBottomPosY = $self.offset().top + $self.height()
 
-        if windowBottomPosY > $self.offset().top and selfBottomPosY > $window.scrollTop()
-          middlePosY = (($self.height() * 1.5) - $self.height()) / 2 * (-1)
-          adjustment = $window.scrollTop() - $self.offset().top
+        if windowBottomPosY > selfOffsetTop and selfBottomPosY > $window.scrollTop()
+          middlePosY = ((selfHeight * selfScale) - selfHeight) / 2 * (-1)
+          adjustment = $window.scrollTop() - selfOffsetTop
           yPos = adjustment / 8 * (-1)
 
           $self.css
