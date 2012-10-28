@@ -39,16 +39,59 @@ $ ->
   $window = $(window)
   $main = $('#main')
 
+  loader = do ->
+    $loader = $('#loader')
+    $text = $('#text')
+    $bar = $('#bar')
+
+    if 0 == $bar.length or 0 == $text.length
+      $text = $('<p/>')
+      $bar = $('<div/>')
+
+      $text
+      .attr
+        id: 'text'
+        'data-status': '0 %'
+      .appendTo($loader)
+
+      $bar
+      .attr
+        id: 'bar'
+        'data-progress': 0
+      .appendTo($loader)
+
+    render = ->
+      $text.text $text.data('status')
+      $bar
+      .stop(true)
+      .animate
+        width: "#{$bar.data 'progress'}%"
+      ,
+        duration: 'fast'
+
+    that =
+      error: (value) ->
+        console.log value
+        $text.data 'status', value
+        render()
+      update: (value) ->
+        $text.data 'status', "#{Math.round value} %"
+        $bar.data 'progress', value
+        render()
+
+    return that
+
+
   handleLoadProgress = (items...) ->
     threshold = 100 / items.length
     percentage = 0
     percentage += threshold for item in items when undefined != item
 
-    $('#loader').text("#{Math.round percentage} %")
+    loader.update percentage
 
 
-  handleLoadError = (jqXHR, textStatus, errorThrown) ->
-    console.log textStatus
+  handleLoadError = (items...) ->
+    loader.error 'Error occured.'
 
 
   handleLoadComplete = (items...) ->

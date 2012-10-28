@@ -1,9 +1,22 @@
+
+// Variables
+
+cForeground = rgb(103,96,82)
+cBackground = rgb(255,246,246)
+cBackgroundWithTransparency = rgba(255,246,246,0.5)
+cPink = rgb(238,128,135)
+
+
+// Layouts
+
 body
+  background-color: cBackground
+  color: cForeground
   margin: 0
   padding: 0
 
   header
-    background-color: rgba(255,255,255,0.5)
+    background-color: cBackgroundWithTransparency
     height: 20px
     left: 0
     position: fixed
@@ -24,11 +37,21 @@ body
     width: 100%
 
     #loader
-      color: rgb(200,200,200)
       position: fixed
       text-align: center
       top: 45%
       width: 100%
+
+      #text
+        font-family: monospace
+
+      #bar
+        background-color: cPink
+        height: 10px
+        left: 0
+        position: absolute
+        top: 0
+        width: 0
 
     .image
       background-attachment: fixed
@@ -40,7 +63,7 @@ body
       width: 100%
 
   footer
-    background-color: rgba(255,255,255,0.5)
+    background-color: cBackgroundWithTransparency
     bottom: 0
     height: 20px
     left: 0

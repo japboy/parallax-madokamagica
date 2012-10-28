@@ -1,5 +1,5 @@
 /**
- * File built with Cakefile at 2012-10-28T10:18:56+09:00
+ * File built with Cakefile at 2012-10-29T00:56:14+09:00
  */
 (function() {
   var $, items,
@@ -34,9 +34,48 @@
   });
 
   $(function() {
-    var $main, $window, handleLoadComplete, handleLoadError, handleLoadProgress, promises;
+    var $main, $window, handleLoadComplete, handleLoadError, handleLoadProgress, loader, promises;
     $window = $(window);
     $main = $('#main');
+    loader = (function() {
+      var $bar, $loader, $text, render, that;
+      $loader = $('#loader');
+      $text = $('#text');
+      $bar = $('#bar');
+      if (0 === $bar.length || 0 === $text.length) {
+        $text = $('<p/>');
+        $bar = $('<div/>');
+        $text.attr({
+          id: 'text',
+          'data-status': '0 %'
+        }).appendTo($loader);
+        $bar.attr({
+          id: 'bar',
+          'data-progress': 0
+        }).appendTo($loader);
+      }
+      render = function() {
+        $text.text($text.data('status'));
+        return $bar.stop(true).animate({
+          width: "" + ($bar.data('progress')) + "%"
+        }, {
+          duration: 'fast'
+        });
+      };
+      that = {
+        error: function(value) {
+          console.log(value);
+          $text.data('status', value);
+          return render();
+        },
+        update: function(value) {
+          $text.data('status', "" + (Math.round(value)) + " %");
+          $bar.data('progress', value);
+          return render();
+        }
+      };
+      return that;
+    })();
     handleLoadProgress = function() {
       var item, items, percentage, threshold, _i, _len;
       items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -48,10 +87,12 @@
           percentage += threshold;
         }
       }
-      return $('#loader').text("" + (Math.round(percentage)) + " %");
+      return loader.update(percentage);
     };
-    handleLoadError = function(jqXHR, textStatus, errorThrown) {
-      return console.log(textStatus);
+    handleLoadError = function() {
+      var items;
+      items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return loader.error('Error occured.');
     };
     handleLoadComplete = function() {
       var $div, i, item, items, _i, _len;
