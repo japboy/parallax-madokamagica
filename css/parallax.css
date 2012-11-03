@@ -1,6 +1,14 @@
 /**
- * File built with Cakefile at 2012-10-29T00:42:54+09:00
+ * File built with Cakefile at 2012-11-03T13:06:34+09:00
  */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
 body {
   background-color: #fff6f6;
   color: #676052;
@@ -28,6 +36,14 @@ body #main {
   position: absolute;
   width: 100%;
 }
+body #main #title {
+  bottom: 20px;
+  left: 5%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 1;
+}
 body #main #loader {
   position: fixed;
   text-align: center;
@@ -43,12 +59,21 @@ body #main #loader #bar {
   left: 0;
   position: absolute;
   top: 0;
+  -webkit-transition: width 0.5s ease 0;
+  -moz-transition: width 0.5s ease 0;
+  -ms-transition: width 0.5s ease 0;
+  -o-transition: width 0.5s ease 0;
+  transition: width 0.5s ease 0;
   width: 0;
 }
 body #main .image {
   background-attachment: fixed;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  -webkit-box-shadow: 0 0 50px #000;
+  -moz-box-shadow: 0 0 50px #000;
+  -ms-box-shadow: 0 0 50px #000;
+  -o-box-shadow: 0 0 50px #000;
   box-shadow: 0 0 50px #000;
   height: 8.333333333333334%;
   position: relative;

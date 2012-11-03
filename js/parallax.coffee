@@ -1,4 +1,7 @@
-items = [
+logos = [
+  'http://www.madoka-magica.com/common/img/header.png'
+]
+wallpapers = [
   'http://www.madoka-magica.com/tv/special/yokokugallery/img/01.jpg'
   'http://www.madoka-magica.com/tv/special/yokokugallery/img/02.jpg'
   'http://www.madoka-magica.com/tv/special/yokokugallery/img/03.jpg'
@@ -37,6 +40,7 @@ $.extend
 
 $ ->
   $window = $(window)
+  $document = $(document)
   $main = $('#main')
 
   loader = do ->
@@ -63,8 +67,7 @@ $ ->
     render = ->
       $text.text $text.data('status')
       $bar
-      .stop(true)
-      .animate
+      .css
         width: "#{$bar.data 'progress'}%"
       ,
         duration: 'fast'
@@ -78,6 +81,8 @@ $ ->
         $text.data 'status', "#{Math.round value} %"
         $bar.data 'progress', value
         render()
+      destroy: ->
+        $loader.remove()
 
     return that
 
@@ -94,11 +99,26 @@ $ ->
     loader.error 'Error occured.'
 
 
-  handleLoadComplete = (items...) ->
+  handleLoadComplete = (logo, items) ->
+    loader.destroy()
+
     $main
     .css
       height: "#{items.length * 100}%"
-    .empty()
+
+    $h1 = $('<h1/>')
+    $img = $('<img/>')
+
+    $img
+    .attr
+      src: logo
+      alt: '魔法少女まどか☆マギカ'
+    .appendTo($h1)
+
+    $h1
+    .attr
+      id: 'title'
+    .appendTo($main)
 
     for item, i in items
       $div = $('<div/>')
@@ -114,6 +134,18 @@ $ ->
 
       $main.append $div
 
+    $title = $('#title')
+    titleOffsetTop = $title.offset().top
+    titleHeight = $title.height()
+
+    $(window).on 'scroll', (ev) ->
+      adjustment = $document.height() / ($window.height() / 3)
+      posY = 20 + $window.scrollTop() / adjustment
+
+      $title
+      .css
+        bottom: "#{posY}px"
+
     $('.image').each (index) ->
       $self = $(@)
       selfOffsetTop = $self.offset().top
@@ -122,20 +154,26 @@ $ ->
 
       $(window).on 'scroll', (ev) ->
         windowBottomPosY = $window.scrollTop() + $window.height()
-        selfBottomPosY = $self.offset().top + $self.height()
+        selfBottomPosY = selfOffsetTop + selfHeight
 
         if windowBottomPosY > selfOffsetTop and selfBottomPosY > $window.scrollTop()
           middlePosY = ((selfHeight * selfScale) - selfHeight) / 2 * (-1)
           adjustment = $window.scrollTop() - selfOffsetTop
-          yPos = adjustment / 8 * (-1)
+          posY = adjustment / 8 * (-1)
 
           $self.css
-            backgroundPosition: "50% #{middlePosY + yPos}px"
+            backgroundPosition: "50% #{middlePosY + posY}px"
 
 
-  promises = $.preloadByDOM(items)
+  promises = $.preloadByDOM(wallpapers)
 
   $.when.apply(@, promises)
   .progress(handleLoadProgress)
   .fail(handleLoadError)
-  .done(handleLoadComplete)
+  .done (wallpapers...) ->
+    p = $.preloadByDOM(logos)
+    $.when.apply(@, p)
+    .fail(handleLoadError)
+    .done (logos...) ->
+      logo = logos[0]
+      handleLoadComplete(logo, wallpapers)
